@@ -1,10 +1,14 @@
 module VideoList where
 
-import Video
+
 import List
-import Html exposing (text, ul)
+import Html
 
+import Video
 
+type alias Model = List (Video.Model)
+
+view : Model -> Html.Html
 view videos =
-  ul []
-    (List.map (Video.view) videos)
+  Html.ul []
+    (List.map Video.view videos)
