@@ -10,13 +10,19 @@
       var App = Elm.fullscreen(Elm.Main, {videos: []});
 
       var xhr = new XMLHttpRequest();
-
       xhr.onreadystatechange = function() {
-        var videos = JSON.parse(xhr.responseText).list
-        App.ports.videos.send(videos);
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText)
+          var videos = response.list
+          App.ports.videos.send(videos);
+        }
       }
 
-      xhr.open("GET", "https://api.dailymotion.com/videos?page=1&fields=title%2Cid&limit=20&list=what-to-watch");
+      xhr.open(
+        "GET",
+        "https://api.dailymotion.com/videos?page=1&fields=title%2Cid&limit=20&list=what-to-watch"
+      )
+
       xhr.send();
     </script>
   </body>
