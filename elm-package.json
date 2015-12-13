@@ -4,7 +4,9 @@
     "repository": "https://github.com/mrblueblue/elm-video-list.git",
     "license": "BSD3",
     "source-directories": [
-        "."
+        ".",
+        "./src",
+        "./src/views"
     ],
     "exposed-modules": [],
     "dependencies": {

@@ -1,4 +1,6 @@
-import Html exposing (text)
+import Html exposing (text, div)
+import VideoList
+
 
 main =
-  text "Hello World"
+  VideoList.view ["this", "is", "a", "video", "list"]
