@@ -15,5 +15,6 @@ state: Signal VideoList.Model
 state =
   Signal.foldp update [] videos
 
-update prevState newVideos =
-  List.concat [prevState, newVideos]
+update: VideoList.Model -> VideoList.Model -> VideoList.Model
+update oldVideos newVideos =
+  List.concat [oldVideos, newVideos]
