@@ -62,13 +62,12 @@ ul {
   color: #BFBFBF;
 }
 
-.spinner-container {
-  height: 200px;
-}
-
 .spinner {
   left: 50%;
-  position: fixed;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 50px;
+  height: 32px;
   -webkit-animation: spinning 1s linear infinite;
   -moz-animation: spinning 1s linear infinite;
   -ms-animation: spinning 1s linear infinite;
@@ -76,6 +75,15 @@ ul {
   animation: spinning 1s linear infinite;
   animation: spinning 1s linear infinite;
   transform-style: preserve-3d;
+}
+
+.spinnger svg {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  top: 50%;
+  margin-top: -8px;
+  fill: #000;
 }
 
 @-webkit-keyframes spinning {

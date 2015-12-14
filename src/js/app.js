@@ -75,6 +75,7 @@ var onreadystatechange = function(){
     var videos = response.list
 
     if (!response.has_more){
+      has_more = false;
       alert('no more videos to fetch!');
       return;
     }
@@ -85,10 +86,8 @@ var onreadystatechange = function(){
       delete video["owner.screenname"];
     });
 
-    setTimeout(function(){
-      App.ports.videos.send({videos: videos, loading: false});
-    }, 10000)
 
+    App.ports.videos.send({videos: videos, loading: false});
   }
 }
 
