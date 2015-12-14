@@ -1,21 +1,40 @@
 import Signal
 import List
-import Html exposing (Html)
+import Html exposing (Html, text, div)
+import Components exposing (loading)
 import VideoList
 
 
-port videos: Signal VideoList.Model
+port videos: Signal State
 
-main : Signal Html
-main =
-  Signal.map VideoList.view state
+type alias State =
+  { videos: VideoList.Model
+    , loading: Bool
+  }
 
-initialState = []
+app: State -> Html
+app state =
+    div [] [
+      VideoList.view state.videos
+      , loading state.loading
+    ]
 
-state: Signal VideoList.Model
+initialState: State
+initialState =
+  { videos = []
+    , loading = False
+  }
+
+state: Signal State
 state =
   Signal.foldp update initialState videos
 
-update: VideoList.Model -> VideoList.Model -> VideoList.Model
-update oldVideos newVideos =
-  List.concat [oldVideos, newVideos]
+update: State -> State -> State
+update next state =
+  { videos = List.concat [state.videos, next.videos]
+    , loading = next.loading
+  }
+
+main : Signal Html
+main =
+  Signal.map app state

@@ -2,13 +2,21 @@ var pageNumber = 1;
 var loading = false;
 var has_more = true;
 
-var App = Elm.fullscreen(Elm.Main, {videos: []});
+var init = {
+  videos: [],
+  loading: false
+}
+
+var App = Elm.fullscreen(Elm.Main, {videos: init});
 var xhr = new XMLHttpRequest();
 
 var getVideos = function(number){
   if (loading || !has_more){
     return;
   }
+
+  console.log("loading")
+  App.ports.videos.send({videos: [], loading: true});
 
   var url = "https://api.dailymotion.com/videos?";
 
@@ -77,7 +85,10 @@ var onreadystatechange = function(){
       delete video["owner.screenname"];
     });
 
-    App.ports.videos.send(videos);
+    setTimeout(function(){
+      App.ports.videos.send({videos: videos, loading: false});
+    }, 10000)
+
   }
 }
 
