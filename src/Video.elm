@@ -1,10 +1,33 @@
 module Video where
 
-import Html
-
+import Html exposing (li, text, div, img, h3, p)
+import Html.Attributes exposing (class, src, style)
+import Json.Encode exposing (string)
 
 type alias Model =
-  { title: String, id: String}
+  {
+    duration: Int
+    , thumbnail_180_url: String
+    , title: String
+    , url: String
+    , id: String
+    , screenname: String
+    , title: String
+    , views_total: Int
+  }
 
 view video =
-  Html.li [] [Html.text video.title]
+  li [class "collection-item"] [
+    div [class "thumbnail-container"] [
+      div [
+        style [
+          ("background-image", "url('" ++ video.thumbnail_180_url ++ "')")
+        ]
+      ] []
+    ]
+    , div [class "content"] [
+      h3 [class "title"] [text video.title]
+      , p [class "subtitle"] [text video.screenname]
+      , p [class "description"] [text (toString(video.views_total) ++ " views")]
+    ]
+  ]

@@ -3,6 +3,6 @@
 # Getting Started
 
 ```bash
-elm make ./src/Main.elm --output=./src/elm.js
+elm make ./src/Main.elm --output=./src/js/elm.js
 open ./src/index.html
 ```
